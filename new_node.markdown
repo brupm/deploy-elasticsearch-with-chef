@@ -27,9 +27,11 @@ New Elasticsearch Node
     node_type
     mlockall
     expected_nodes
-    ulimit -l unlimited
-    ES_MIN_MEM same ES_MAX_MEM (half of total)
     unicast
-    unicast list to INTERNAL IP:9300
-* Restart elasticsearch
-
+  unicast list to INTERNAL IP:9300
+  sudo su -
+    ulimit -l unlimited
+* ES_MIN_MEM same ES_MAX_MEM (half of total)
+  ssh -t $SSH_OPTIONS $HOST "cat /usr/local/etc/elasticsearch/elasticsearch-env.sh"
+* sudo service elasticsearch stop
+* sudo service elasticsearch start
