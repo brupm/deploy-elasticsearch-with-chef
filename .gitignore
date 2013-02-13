@@ -1,0 +1,6 @@
+.DS_Store
+Gemfile.lock
+*.pem
+node.json
+tmp/*
+!tmp/.gitignore

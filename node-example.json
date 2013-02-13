@@ -1,0 +1,65 @@
+{
+  "run_list": [ "recipe[monit]",
+                "recipe[elasticsearch]",
+                "recipe[elasticsearch::plugins]",
+                "recipe[elasticsearch::ebs]",
+                "recipe[elasticsearch::data]",
+                "recipe[elasticsearch::aws]",
+                "recipe[elasticsearch::nginx]",
+                "recipe[elasticsearch::proxy]",
+                "recipe[elasticsearch::monit]" ],
+
+  "elasticsearch" : {
+    "cluster_name" : "elasticsearch_test_with_chef",
+    "bootstrap" : { "mlockall" : false },
+
+    "discovery" : { "type": "ec2" },
+
+    "data_path" : "/usr/local/var/data/elasticsearch/disk1",
+
+    "data" : {
+
+      "devices" : {
+        "/dev/sda2" : {
+          "file_system"      : "ext3",
+          "mount_options"    : "rw,user",
+          "mount_path"       : "/usr/local/var/data/elasticsearch/disk1",
+          "format_command"   : "mkfs.ext3",
+          "fs_check_command" : "dumpe2fs",
+          "ebs"            : {
+            "size"                  : 25,
+            "delete_on_termination" : true,
+            "type"                  : "io1",
+            "iops"                  : 100
+          }
+        }
+      }
+    },
+
+    "cloud"   : {
+      "aws"     : {
+        "access_key" : "<REPLACE>",
+        "secret_key" : "<REPLACE>",
+        "region"     : "us-east-1"
+      },
+      "ec2"     : {
+        "security_group": "elasticsearch-test"
+      }
+    },
+
+    "plugins" : {
+      "karmi/elasticsearch-paramedic" : {}
+    },
+
+    "nginx" : {
+      "users" : [ { "username" : "USERNAME", "password" : "PASSWORD" } ],
+      "allow_cluster_api" : true
+    }
+  },
+
+  "monit" : {
+    "notify_email" : "<REPLACE WITH YOUR E-MAIL>",
+    "mail_format"  : { "from" : "monit@amazonaws.com", "subject" : "[monit] $SERVICE $EVENT on $HOST", "message" : "$SERVICE $ACTION: $DESCRIPTION" }
+  }
+
+}
