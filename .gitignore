@@ -4,4 +4,5 @@ Gemfile.lock
 node.json
 tmp/*
 !tmp/.gitignore
-server_monitoring.markdown
+server_monitoring.md
+new_node.md
