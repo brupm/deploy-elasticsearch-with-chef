@@ -4,3 +4,4 @@ Gemfile.lock
 node.json
 tmp/*
 !tmp/.gitignore
+server_monitoring.markdown
