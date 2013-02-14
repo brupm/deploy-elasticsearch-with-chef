@@ -47,5 +47,5 @@ Resources
 * http://www.elasticsearch.org/tutorials/2012/03/21/deploying-elasticsearch-with-chef-solo.html
 * http://gibrown.wordpress.com/2013/01/24/elasticsearch-five-things-i-was-doing-wrong/
 * http://euphonious-intuition.com/2013/02/five-things-i-learned-from-elasticsearch-training/#.UQ1KQVqjdGQ
-
+* http://asquera.de/opensource/2012/11/25/elasticsearch-pre-flight-checklist/
 
